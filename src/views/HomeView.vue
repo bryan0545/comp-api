@@ -1,18 +1,41 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Reactive vs Ref</h1>
+
+    <h4>{{ reactiveObj }}</h4>
+    <h4>{{ refObj }}</h4>
+    <button @click="changeReactiveObj">changeReactiveObj</button>
+    <button @click="changeRefObj">changeRefObj</button>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import { ref, reactive } from "vue";
 export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
-  }
-}
+  name: "HomeView",
+  setup() {
+    const refObj = ref({
+      name: "Ref",
+      age: 25,
+    });
+
+    const reactiveObj = reactive({
+      name: "Reactive",
+      age: 25,
+    });
+
+    const changeReactiveObj = () => {
+      reactiveObj.name = "Reactive Changed";
+      reactiveObj.age = 30;
+    };
+
+    const changeRefObj = () => {
+      refObj.value.name = "Ref Changed";
+      refObj.value.age = 30;
+    };
+
+    return { reactiveObj, refObj, changeReactiveObj, changeRefObj };
+  },
+};
 </script>
